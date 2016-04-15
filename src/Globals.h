@@ -1,16 +1,19 @@
 #pragma once
 
 #include <array>
+#include "Vec2.h"
 
 namespace Globals {
-  const int BOARD_HEIGHT = 10;
-  const int BOARD_WIDTH = 10;
+  const int BOARD_HEIGHT = 15;
+  const int BOARD_WIDTH = 40;
 
-  const int START_X = 0;
-  const int START_Y = 0;
+  const Vec2 START(0, 0);
+  const Vec2 START_BALL_DIRECTION(1, 1);
 
-  const int START_DIRECTION_X = 1;
-  const int START_DIRECTION_Y = 1;
+  const Vec2 LEFT_PADDLE_START(0, 0);
+  const Vec2 RIGHT_PADDLE_START(BOARD_WIDTH - 1, 0);
+  
+  const int PADDLE_LENGTH = 3;
 
   const int WIN_SCORE = 3;
   const int SESSION_LENGTH = 5;

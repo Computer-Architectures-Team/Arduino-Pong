@@ -7,15 +7,46 @@
 
 Game::Game(IViewable *viewer, Board& game_field)
     : viewer_(viewer),
+    ball_pos_(Globals::START),
+    left_paddle_pos_(Globals::LEFT_PADDLE_START),
+    right_paddle_pos_(Globals::RIGHT_PADDLE_START),
+    ball_direction_(Globals::START_BALL_DIRECTION),
     game_field_(game_field) { }
 
 void Game::run() {
     while (true) {
         viewer_->draw_field();
-        viewer_->draw_ball(0, 0);
-        viewer_->draw_left_paddle(0, 0, 0);
-        viewer_->draw_right_paddle(0, 0, 0);
+        viewer_->draw_ball(ball_pos_);
+        viewer_->draw_left_paddle(left_paddle_pos_);
+        viewer_->draw_right_paddle(right_paddle_pos_);
+
+        modify_ball_direction(ball_pos_);
+
+        update();
 
         sleep(1);
     }
+}
+
+void Game::modify_ball_direction(Vec2& ball_pos) {
+    if (ball_pos.X() == 0) {
+        ball_direction_.X(1);
+    }
+    if (ball_pos.Y() == 0) {
+        ball_direction_.Y(1);
+    }
+    if (ball_pos.X() == Globals::BOARD_WIDTH - 1) {
+        ball_direction_.X(-1);
+    }
+    if (ball_pos.Y() == Globals::BOARD_HEIGHT - 1) {
+        ball_direction_.Y(-1);
+    }
+}
+
+void Game::update() {
+    // update ball
+    game_field_[ball_pos_.Y()][ball_pos_.X()] = false;
+    ball_pos_.X(ball_pos_.X() + ball_direction_.X());
+    ball_pos_.Y(ball_pos_.Y() + ball_direction_.Y());
+    game_field_[ball_pos_.Y()][ball_pos_.X()] = true;
 }

@@ -4,10 +4,10 @@
 #include "Session.h"
 
 class IScoreManager {
-    public:
-        virtual ~IScoreManager() { }
+public:
+    virtual ~IScoreManager() { }
 
-        virtual void add_session(Session& session) = 0;
+    virtual void add_session(Session& session) = 0;
 
-        virtual void upload_sessions() = 0;
+    virtual void upload_sessions() = 0;
 };

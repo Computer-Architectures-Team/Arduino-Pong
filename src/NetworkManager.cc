@@ -9,5 +9,4 @@ void NetworkManager::send(const void *buf, size_t len) {
     std::cout << "sent " << len << " bytes on " << addr_ << ':' << port_;
 }
 
-void NetworkManager::recv(void *buf, size_t len) {}
-
+void NetworkManager::recv(void *buf, size_t len) { }

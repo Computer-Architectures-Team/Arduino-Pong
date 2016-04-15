@@ -4,16 +4,18 @@
 #include <array>
 
 class ConsoleViewer : public IViewable {
-    private:
-        Board& game_field_;
-    public:
-        ConsoleViewer(Board& game_field);
+private:
+    Board& game_field_;
 
-        void draw_field() override;
+    void init();
+public:
+    ConsoleViewer(Board& game_field);
 
-        void draw_ball(int row, int col) override;
+    void draw_field() override;
 
-        void draw_left_paddle(int col, int start_row, int end_row) override;
+    void draw_ball(Vec2 pos) override;
 
-        void draw_right_paddle(int col, int start_row, int end_row) override;
+    void draw_left_paddle(Vec2 pos) override;
+
+    void draw_right_paddle(Vec2 pos) override;
 };

@@ -5,7 +5,6 @@
 #include "ConsoleViewer.h"
 
 int main() {
-
     Board game_field = { { false } };
     ConsoleViewer v(game_field);
 

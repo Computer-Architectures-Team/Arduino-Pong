@@ -6,14 +6,13 @@
 #include <queue>
 
 class ScoreManager : public IScoreManager {
-    private:
-        std::queue<Session> sessions_;
-        INetworkManager* network_manager_;
+private:
+    std::queue<Session> sessions_;
+    INetworkManager* network_manager_;
+public:
+    ScoreManager(INetworkManager* manager);
 
-    public:
-        ScoreManager(INetworkManager* manager);
+    void add_session(Session& session) override;
 
-        void add_session(Session& session) override;
-
-        void upload_sessions() override;
+    void upload_sessions() override;
 };

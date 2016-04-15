@@ -5,9 +5,9 @@
 
 class ConsoleViewer : public IViewable {
     private:
-        std::array<std::array<bool, Globals::BOARD_WIDTH>, Globals::BOARD_HEIGHT>& game_field_;
+        Board& game_field_;
     public:
-        ConsoleViewer(std::array<std::array<bool, Globals::BOARD_WIDTH>, Globals::BOARD_HEIGHT>& game_field);
+        ConsoleViewer(Board& game_field);
 
         void draw_field() override;
 

@@ -5,6 +5,8 @@
 
 class IScoreManager {
     public:
+        virtual ~IScoreManager() { }
+
         virtual void add_session(Session& session) = 0;
 
         virtual void upload_sessions() = 0;

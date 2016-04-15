@@ -5,9 +5,9 @@
 #include <array>
 #include <stdlib.h>
 
-Game::Game(IViewable *viewer,
-        std::array<std::array<bool, Globals::BOARD_WIDTH>, Globals::BOARD_HEIGHT>& game_field)
-    : viewer_(viewer), game_field_(game_field) {}
+Game::Game(IViewable *viewer, Board& game_field)
+    : viewer_(viewer),
+    game_field_(game_field) { }
 
 void Game::run() {
     while (true) {

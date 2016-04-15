@@ -16,6 +16,4 @@ class ScoreManager : public IScoreManager {
         void add_session(Session& session) override;
 
         void upload_sessions() override;
-
-        ~ScoreManager();
 };

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <stdlib.h>
 
-ConsoleViewer::ConsoleViewer(std::array<std::array<bool, Globals::BOARD_WIDTH>,
-        Globals::BOARD_HEIGHT>& game_field) : game_field_(game_field) {
+ConsoleViewer::ConsoleViewer(Board& game_field)
+  : game_field_(game_field) {
     game_field_[Globals::START_Y][Globals::START_X] = true;
 }
 

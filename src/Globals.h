@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 namespace Globals {
   const int BOARD_HEIGHT = 10;
   const int BOARD_WIDTH = 10;
@@ -13,3 +15,5 @@ namespace Globals {
   const int WIN_SCORE = 3;
   const int SESSION_LENGTH = 5;
 }
+
+typedef std::array<std::array<bool, Globals::BOARD_WIDTH>, Globals::BOARD_HEIGHT> Board;

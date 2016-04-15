@@ -5,12 +5,12 @@
 #include <array>
 #include <stdlib.h>
 
-Game::Game(IViewable *viewer, std::array<std::array<bool, Globals::BOARD_WIDTH>,
-        Globals::BOARD_HEIGHT>& game_field) : viewer_(viewer), game_field_(game_field) {
-}
+Game::Game(IViewable *viewer,
+        std::array<std::array<bool, Globals::BOARD_WIDTH>, Globals::BOARD_HEIGHT>& game_field)
+    : viewer_(viewer), game_field_(game_field) {}
 
 void Game::run() {
-    while(true) {
+    while (true) {
         viewer_->draw_field();
         viewer_->draw_ball(0, 0);
         viewer_->draw_left_paddle(0, 0, 0);

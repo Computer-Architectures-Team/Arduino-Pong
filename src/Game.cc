@@ -25,7 +25,7 @@ void Game::run() {
 
         update();
 
-        input_handler_->handle(left_paddle_pos_, right_paddle_pos_);
+        input_handler_->handle(&left_paddle_pos_, &right_paddle_pos_);
 
         usleep(100000);
     }

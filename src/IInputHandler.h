@@ -1,13 +1,12 @@
 #pragma once
 
 #include "Vec2.h"
+#include "IViewable.h"
+#include "Globals.h"
 
-class IInputHandler
-{
-public:
-    virtual ~IInputHandler() { }
+class IInputHandler {
+    public:
+        virtual ~IInputHandler() { }
 
-    virtual void setLeftPaddlePosition(Vec2 pos) = 0;
-
-    virtual void setRightPaddlePosition(Vec2 pos) = 0;
+        virtual void handle(Vec2& p1_paddle_pos, Vec2& p2_paddle_pos) = 0;
 };

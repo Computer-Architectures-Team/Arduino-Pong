@@ -1,17 +1,16 @@
 #pragma once
 
-class Vec2
-{
-private:
-    int x_, y_;
-public:
-    Vec2(int x, int y);
+class Vec2 {
+    private:
+        int x_, y_;
+    public:
+        Vec2(int x, int y);
 
-    int X() const;
+        int X() const;
 
-    void X(int val);
+        void X(int val);
 
-    int Y() const;
+        int Y() const;
 
-    void Y(int val);
+        void Y(int val);
 };

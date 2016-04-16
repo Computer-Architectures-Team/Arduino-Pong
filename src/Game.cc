@@ -5,8 +5,9 @@
 #include <array>
 #include <stdlib.h>
 
-Game::Game(IViewable *viewer, Board& game_field)
+Game::Game(IViewable* viewer, IInputHandler* handler, Board& game_field)
     : viewer_(viewer),
+    input_handler_(handler),
     ball_pos_(Globals::START),
     left_paddle_pos_(Globals::LEFT_PADDLE_START),
     right_paddle_pos_(Globals::RIGHT_PADDLE_START),
@@ -24,7 +25,9 @@ void Game::run() {
 
         update();
 
-        sleep(1);
+        input_handler_->handle(left_paddle_pos_, right_paddle_pos_);
+
+        usleep(100000);
     }
 }
 
@@ -32,12 +35,15 @@ void Game::modify_ball_direction(Vec2& ball_pos) {
     if (ball_pos.X() == 0) {
         ball_direction_.X(1);
     }
+
     if (ball_pos.Y() == 0) {
         ball_direction_.Y(1);
     }
+
     if (ball_pos.X() == Globals::BOARD_WIDTH - 1) {
         ball_direction_.X(-1);
     }
+
     if (ball_pos.Y() == Globals::BOARD_HEIGHT - 1) {
         ball_direction_.Y(-1);
     }

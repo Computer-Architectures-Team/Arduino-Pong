@@ -3,10 +3,7 @@
 #include "Vec2.h"
 #include "IInputHandler.h"
 
-class KeyboardHandler : public IInputHandler
-{
-public:
-    void setLeftPaddlePosition(Vec2 pos) override;
-
-    void setRightPaddlePosition(Vec2 pos) override;
+class KeyboardHandler : public IInputHandler {
+    public:
+        void handle(Vec2& p1_paddle_pos, Vec2& p2_paddle_pos) override;
 };

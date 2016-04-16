@@ -13,9 +13,11 @@ ConsoleViewer::ConsoleViewer(Board& game_field)
 
 void ConsoleViewer::init() {
     game_field_[Globals::START.Y()][Globals::START.X()] = true;
+
     for (int i = 0; i < Globals::PADDLE_LENGTH; i++) {
         game_field_[Globals::LEFT_PADDLE_START.Y() + i][Globals::LEFT_PADDLE_START.X()] = true;
     }
+
     for (int i = 0; i < Globals::PADDLE_LENGTH; i++) {
         game_field_[Globals::RIGHT_PADDLE_START.Y() + i][Globals::RIGHT_PADDLE_START.X()] = true;
     }

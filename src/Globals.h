@@ -12,7 +12,7 @@ namespace Globals {
 
   const Vec2 LEFT_PADDLE_START(0, 0);
   const Vec2 RIGHT_PADDLE_START(BOARD_WIDTH - 1, 0);
-  
+
   const int PADDLE_LENGTH = 3;
 
   const int WIN_SCORE = 3;

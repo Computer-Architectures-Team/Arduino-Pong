@@ -105,3 +105,8 @@
 
 #### 3. Принципна блок схема
 ![Блок схема](assets/arduino-pong-block-diagram.png)
+
+### IV. Имплементация
+
+#### 1. Електрическа схема
+![Ел. схема](http://i.imgur.com/jSB87Ca.png)

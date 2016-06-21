@@ -219,7 +219,7 @@
 ![Поглед отгоре](http://puu.sh/oSvqX/016bafd72a.jpg)
 
 #### 3. Принципна блок схема
-![Блок схема](assets/arduino-pong-block-diagram.png)
+![Блок схема](https://i.imgur.com/Q7NrO1h.png)
 
 ### IV. Имплементация
 

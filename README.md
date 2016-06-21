@@ -418,8 +418,8 @@ ROUND_WINNER check_victory() {
 void handle_ball_collisions() {
   ROUND_WINNER winner = check_victory();
   reset_if_won(winner);
-  modify_direction_if_nessesary(&ball_pos.x);
-  modify_direction_if_nessesary(&ball_pos.y);
+  modify_direction_if_nessesary();
+  modify_direction_if_nessesary();
 }
 
 void clear_paddle(vec_t paddle_pos) {

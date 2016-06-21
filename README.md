@@ -292,7 +292,167 @@
 
 ![Ел. схема](https://dcw9y8se13llu.cloudfront.net/avatars/Deeder_M.jpg)
 
-#### 5. Равносметка
+#### 5. Код
+
+```C
+#include <LedControl.h>
+
+typedef struct vec_t {
+  int x;
+  int y;
+};
+
+typedef enum {
+  NONE,
+  LEFT,
+  RIGHT
+} ROUND_WINNER;
+
+LedControl lc = LedControl(51, 53, 52, 1);
+
+const int MATRIX_SIZE = 8;
+const int MATRIX_SQUARE_SIDE = 1; // Describes how many by how many matrices we have.
+const int NUMBER_OF_SENSORS = 8;
+const int PADDLE_LENGTH = 2;
+
+int tcrt_sensors[NUMBER_OF_SENSORS] { 0 };
+const int tcrt_pins[NUMBER_OF_SENSORS] = { 30, 32, 34, 36, 31, 33, 35, 37 };
+
+vec_t left_paddle_pos { 0, 0 };
+vec_t right_paddle_pos { MATRIX_SIZE - 1, 0 };
+
+vec_t ball_pos { 2, MATRIX_SIZE / 2 };
+vec_t ball_direction { 1, 1 };
+
+ROUND_WINNER check_victory(ROUND_WINNER winner);
+void reset_if_won();
+
+void clear_at(vec_t pos);
+void clear_screen();
+
+void display_at(vec_t pos);
+void display_paddle(vec_t pos);
+
+void handle_ball_collisions();
+void update_ball_position();
+
+void read_sensors();
+
+void setup() {
+  Serial.begin(9600);
+  lc.shutdown(0,false);
+  lc.setIntensity(0,8);
+  lc.clearDisplay(0);
+  int i;
+  for(i = 0; i < NUMBER_OF_SENSORS; i++) {
+    pinMode(tcrt_pins[i], INPUT_PULLUP);
+    digitalWrite(tcrt_pins[i], HIGH);
+  }
+}
+
+void loop() {
+  clear_screen();
+  
+  read_sensors();
+  
+  handle_ball_collisions();
+  update_ball_position();
+  
+  display_paddle(left_paddle_pos);
+  display_paddle(right_paddle_pos);
+  display_at(ball_pos);
+
+  delay(500);
+}
+
+void read_sensors() {
+  int i;
+  for (i = 0; i < NUMBER_OF_SENSORS; i++) {
+    tcrt_sensors[i] = digitalRead(tcrt_pins[i]);
+  }
+};
+
+void update_ball_position() {
+  ball_pos.x += ball_direction.x;
+  ball_pos.y += ball_direction.y;
+}
+
+void modify_direction_if_nessesary() {
+  if (ball_pos.x == 0) {
+    ball_direction.x = 1;
+  }
+  
+  if (ball_pos.x == MATRIX_SQUARE_SIDE * MATRIX_SIZE - 1) {
+    ball_direction.x = -1;
+  }
+
+  if (ball_pos.y == 0) {
+    ball_direction.y = 1;
+  }
+  
+  if (ball_pos.y == MATRIX_SQUARE_SIDE * MATRIX_SIZE - 1) {
+    ball_direction.y = -1;
+  }
+}
+
+void reset_if_won(ROUND_WINNER winner) {
+  if (winner != NONE) {
+    if (winner = LEFT)
+      Serial.println("Left won");
+    else
+      Serial.println("Right won");
+
+    ball_pos.x = 2;
+    ball_pos.y = MATRIX_SIZE / 2;
+  }
+}
+
+ROUND_WINNER check_victory() {
+  if (ball_pos.x == 0 && ball_direction.x == -1)
+    return RIGHT;
+  if (ball_pos.x == MATRIX_SIZE - 1 && ball_direction.x == 1)
+    return LEFT;
+  return NONE;
+}
+
+void handle_ball_collisions() {
+  ROUND_WINNER winner = check_victory();
+  reset_if_won(winner);
+  modify_direction_if_nessesary(&ball_pos.x);
+  modify_direction_if_nessesary(&ball_pos.y);
+}
+
+void clear_paddle(vec_t paddle_pos) {
+  int i;
+  for (i = 0; i < PADDLE_LENGTH; i++) {
+    vec_t current { paddle_pos.x, paddle_pos.y + i };
+    clear_at(current);
+  }
+}
+void clear_screen() {
+ clear_paddle(left_paddle_pos);
+ clear_paddle(right_paddle_pos);
+ clear_at(ball_pos);
+}
+
+void clear_at(vec_t pos) {
+  lc.setLed(0, pos.x, pos.y, false);
+}
+
+void display_paddle(vec_t pos) {
+ int i;
+ for (i = 0; i < PADDLE_LENGTH; i++) {
+  vec_t current { pos.x, pos.y + i };
+  display_at(current);
+ }
+}
+
+void display_at(vec_t pos) {
+  lc.setLed(0, pos.x, pos.y, true);
+}
+```
+
+#### 6. Равносметка
 
 - 1 x Arduino Mega 2560 - 82лв.
 - 8 x TCRT-5000 - 2 лв.
